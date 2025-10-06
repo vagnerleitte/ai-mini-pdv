@@ -1,4 +1,9 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -83,6 +88,20 @@ export class ProductsService {
 
     return this.prisma.product.delete({
       where: { id }
+    });
+  }
+
+  async adjustStock(id: number, delta: number) {
+    const product = await this.findOne(id);
+    const newQuantity = product.quantity + delta;
+
+    if (newQuantity < 0) {
+      throw new BadRequestException('Estoque insuficiente');
+    }
+
+    return this.prisma.product.update({
+      where: { id },
+      data: { quantity: newQuantity }
     });
   }
 

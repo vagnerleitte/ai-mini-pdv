@@ -1,22 +1,36 @@
-### Criar produto
-POST http://localhost:3000/api/products
+@baseUrl = http://localhost:3000/api
+@productId = 2
+
+### Criar produto base (se necessário)
+POST {{baseUrl}}/products
 Content-Type: application/json
 
 {
-  "name": "Teclado Mecânico",
-  "sku": "SKU-001",
+  "sku": "ABC123",
+  "name": "Sela padrão",
   "price": "199.90",
   "quantity": 10
 }
 
-### Listar produtos
-GET http://localhost:3000/api/products
+### Conferir antes da entrada
+GET {{baseUrl}}/products/{{productId}}
 
-### Buscar produto por id
-GET http://localhost:3000/api/products/1
+### Entrada de estoque (+5)
+PATCH {{baseUrl}}/products/{{productId}}/in
+Content-Type: application/json
+
+{
+  "qty": 5
+}
+
+### Conferir após a entrada
+GET {{baseUrl}}/products/{{productId}}
+
+### Listar produtos
+GET {{baseUrl}}/products
 
 ### Atualizar produto
-PATCH http://localhost:3000/api/products/1
+PATCH {{baseUrl}}/products/{{productId}}
 Content-Type: application/json
 
 {
@@ -25,4 +39,4 @@ Content-Type: application/json
 }
 
 ### Remover produto
-DELETE http://localhost:3000/api/products/1
+DELETE {{baseUrl}}/products/{{productId}}
