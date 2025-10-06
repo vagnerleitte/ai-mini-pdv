@@ -11,6 +11,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "paths": {
       "@mini-pdv/*": ["libs/*/src"],
       "@mini-pdv/api/*": ["apps/api/src/*"]
