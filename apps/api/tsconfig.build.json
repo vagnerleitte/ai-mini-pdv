@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "sourceMap": false
+  },
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts", "src/**/*.e2e-spec.ts"]
+}
