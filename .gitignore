@@ -4,3 +4,4 @@ apps/api/.env
 apps/api/prisma/dev.db
 dist
 apps/api/dist
+apps/web/.angular/
