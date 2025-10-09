@@ -13,7 +13,7 @@ import { TuiRoot } from '@taiga-ui/core';
   template: `
     <tui-root>
       <div class="app-shell">
-        <header class="app-header shadow-sm">
+        <header class="app-header">
           <div class="brand">
             <span class="brand-logo">Mini PDV</span>
           </div>
@@ -32,13 +32,6 @@ import { TuiRoot } from '@taiga-ui/core';
             <span>VP</span>
           </div>
         </header>
-
-        <section class="breadcrumbs" *ngIf="breadcrumbs.length">
-          <span *ngFor="let crumb of breadcrumbs; let last = last" class="crumb">
-            <span>{{ crumb }}</span>
-            <span class="divider" *ngIf="!last">/</span>
-          </span>
-        </section>
 
         <main class="content">
           <router-outlet></router-outlet>
@@ -70,7 +63,7 @@ import { TuiRoot } from '@taiga-ui/core';
         justify-content: space-between;
         padding: 1rem 2rem;
         background: #ffffff;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
       }
 
       .brand-logo {
@@ -107,26 +100,6 @@ import { TuiRoot } from '@taiga-ui/core';
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .breadcrumbs {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 2rem;
-        font-size: 0.875rem;
-        color: rgba(15, 23, 42, 0.6);
-      }
-
-      .crumb {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-transform: capitalize;
-      }
-
-      .divider {
-        color: rgba(15, 23, 42, 0.3);
       }
 
       .content {
