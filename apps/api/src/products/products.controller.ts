@@ -49,6 +49,12 @@ export class ProductsController {
     return this.productsService.adjustStock(id, qty);
   }
 
+  @Patch(':id/out')
+  stockOut(@Param('id', ParseIntPipe) id: number, @Body() adjustStockDto: AdjustStockDto) {
+    const qty = Math.abs(adjustStockDto.qty ?? 0);
+    return this.productsService.adjustStock(id, -qty);
+  }
+
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);
