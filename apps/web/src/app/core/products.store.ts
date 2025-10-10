@@ -64,7 +64,7 @@ export class ProductsStore {
     }
   }
 
-  async create(dto: CreateProductDto): Promise<void> {
+  async create(dto: CreateProductDto): Promise<boolean> {
     this.setLoading(true);
 
     try {
@@ -72,9 +72,15 @@ export class ProductsStore {
       this.upsert(product);
       this.selected.set(product);
       this.error.set(null);
-      this.showSuccess('Produto criado');
+      return true;
     } catch (error) {
-      this.handleError(error, 'Não foi possível criar o produto.');
+      const message =
+        this.extractErrorMessage(error) ??
+        'Não foi possível criar o produto.';
+
+      this.error.set(message);
+      console.error('[ProductsStore] create failed:', error);
+      return false;
     } finally {
       this.setLoading(false);
     }

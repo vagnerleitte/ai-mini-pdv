@@ -14,18 +14,51 @@ import { ProductsStore } from '../core/products.store';
   template: `
     <section class="page">
       <header class="page-header">
-        <div class="page-heading">
-          <nav class="breadcrumbs" aria-label="Navegação secundária">
-            <a tuiLink routerLink="/produtos">Produtos</a>
-            <span class="divider" aria-hidden="true">/</span>
-            <span class="current">Lista</span>
-          </nav>
-          <h1>Produtos</h1>
-          <p class="subtitle">Gerencie o catálogo e mantenha o estoque em dia.</p>
+        <div class="header-top">
+          <div class="header-meta">
+            <nav class="breadcrumbs" aria-label="Navegação secundária">
+              <a tuiLink routerLink="/produtos">Produtos</a>
+              <span class="divider" aria-hidden="true">/</span>
+              <span class="current">Lista</span>
+            </nav>
+            <h1>Produtos</h1>
+          </div>
+
+          <div class="page-actions" role="group" aria-label="Ações rápidas">
+            <a
+              tuiButton
+              appearance="primary"
+              size="m"
+              class="action-button action-button--create"
+              aria-label="Cadastrar produto"
+              routerLink="/produtos/novo"
+            >
+              <svg class="button-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                <path
+                  d="M10 4a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5a1 1 0 0 1 1-1z"
+                />
+              </svg>
+              <span class="btn__label" aria-hidden="true">Cadastrar produto</span>
+            </a>
+            <a
+              tuiButton
+              appearance="primary"
+              size="m"
+              class="action-button action-button--sale"
+              aria-label="Registrar venda"
+              routerLink="/vendas/nova"
+            >
+              <svg class="button-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                <path
+                  d="M3 4a1 1 0 0 0 0 2h1l1.2 6A2 2 0 0 0 7.17 13H14a1 1 0 1 0 0-2H7.17l-.14-.72L16 9a1 1 0 0 0 .98-.8l.75-3.76A1 1 0 0 0 16.76 3H4.24l-.18-1A1 1 0 0 0 3.08 1H2a1 1 0 0 0 0 2h.24l1.2 6.03.56 2.78A3 3 0 0 0 7.17 15H15a1 1 0 1 0 0-2h-7.83a1 1 0 0 1-.98-.8L6 11h8a3 3 0 0 0 2.94-2.4l.63-3.16H4.62l-.12-.6H17a1 1 0 1 0 0-2H3zM8 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                />
+              </svg>
+              <span class="btn__label" aria-hidden="true">Registrar Venda</span>
+            </a>
+          </div>
         </div>
-        <button tuiButton appearance="primary" size="m" class="cta-button" (click)="goToSale()">
-          Registrar Venda
-        </button>
+
+        <p class="subtitle">Gerencie o catálogo e mantenha o estoque em dia.</p>
       </header>
 
       <div class="page-toolbar">
@@ -114,21 +147,28 @@ import { ProductsStore } from '../core/products.store';
 
       .page-header {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
+        flex-direction: column;
+        gap: 0.75rem;
       }
 
-      .page-heading {
+      .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .header-meta {
         display: flex;
         flex-direction: column;
+        gap: 0.5rem;
       }
 
       .breadcrumbs {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-bottom: 0.5rem;
         font-size: 0.875rem;
         color: rgba(15, 23, 42, 0.6);
       }
@@ -138,7 +178,7 @@ import { ProductsStore } from '../core/products.store';
         color: rgba(15, 23, 42, 0.7);
       }
 
-      .page-heading h1 {
+      .header-meta h1 {
         margin: 0;
         font-size: 2rem;
         font-weight: 700;
@@ -146,12 +186,64 @@ import { ProductsStore } from '../core/products.store';
       }
 
       .subtitle {
-        margin: 0.25rem 0 0;
+        margin: 0;
         color: rgba(15, 23, 42, 0.6);
       }
 
-      .cta-button {
-        flex-shrink: 0;
+      .page-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-left: auto;
+      }
+
+      .action-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-inline: 1rem;
+      }
+
+      .action-button .button-icon {
+        width: 1.1rem;
+        height: 1.1rem;
+        fill: currentColor;
+      }
+
+      .action-button--sale {
+        background-color: #0f9d58;
+        border-color: #0f9d58;
+      }
+
+      .action-button--sale:hover,
+      .action-button--sale:focus-visible {
+        background-color: #0c8a4d;
+        border-color: #0c8a4d;
+      }
+
+      .btn__label {
+        display: inline;
+      }
+
+      @media (max-width: 640px) {
+        .header-top {
+          align-items: flex-start;
+        }
+
+        .page-actions {
+          width: 100%;
+          justify-content: flex-end;
+        }
+
+        .action-button {
+          padding-inline: 0.65rem;
+        }
+
+        .btn__label {
+          display: none;
+        }
       }
 
       .page-toolbar {
@@ -358,10 +450,6 @@ export class ProductsListPage {
       const values = [product.sku, product.name];
       return values.some((value) => value.toLowerCase().includes(term));
     });
-  }
-
-  goToSale(): void {
-    this.router.navigate(['/vendas/nova']);
   }
 
   openProduct(id: number): void {
